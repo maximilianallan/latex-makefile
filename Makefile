@@ -19,3 +19,6 @@ words:
 
 clean:
 	rm build/*
+
+mrproper: clean
+	rm ${file}.pdf

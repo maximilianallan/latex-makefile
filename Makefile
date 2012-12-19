@@ -1,18 +1,20 @@
 #source file
 file=draft
+TEXOPTS=-file-line-error -halt-on-error -output-directory=build
 
 pdf:
-	pdflatex -file-line-error -halt-on-error -output-directory=build ${file}
+	pdflatex $(TEXOPTS) ${file}
 	bibtex build/${file}
-	pdflatex -file-line-error -halt-on-error -output-directory=build ${file}
-	pdflatex -file-line-error -halt-on-error -output-directory=build ${file}
+	pdflatex $(TEXOPTS) ${file}
+	pdflatex $(TEXOPTS) ${file}
 	mv build/${file}.pdf .
 
 dvi:
-	latex ${file}
-	bibtex ${file}
-	latex ${file}
-	latex ${file}
+	latex $(TEXOPTS) ${file}
+	bibtex build/${file}
+	latex $(TEXOPTS) ${file}
+	latex $(TEXOPTS) ${file}
+	mv build/${file}.dvi .
 
 words:
 	pdftotext ${file}.pdf - | wc -w
